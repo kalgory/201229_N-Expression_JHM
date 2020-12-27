@@ -17,17 +17,17 @@ int getStickNumber(int count) {
   return stick_number;
 }
 
-void makeSet(vector<set<int>>& result_vec_vec, const int count) {
+void makeSet(vector<set<int>>& result_set_vec, const int count) {
   int stick_number = getStickNumber(count);
-  result_vec_vec[count].insert(stick_number); // append nn;
+  result_set_vec[count].insert(stick_number); // append nn;
   for (int i = 0; i < count; i++) {
-    for (int result_1 : result_vec_vec[i]) {
-      for (int result_2 : result_vec_vec[count - i - 1]) {
-        result_vec_vec[count].insert(result_1 + result_2);
-        result_vec_vec[count].insert(result_1 - result_2);
-        result_vec_vec[count].insert(result_1 * result_2);
+    for (int result_1 : result_set_vec[i]) {
+      for (int result_2 : result_set_vec[count - i - 1]) {
+        result_set_vec[count].insert(result_1 + result_2);
+        result_set_vec[count].insert(result_1 - result_2);
+        result_set_vec[count].insert(result_1 * result_2);
         if (result_2 != 0) {
-          result_vec_vec[count].insert(result_1 / result_2);
+          result_set_vec[count].insert(result_1 / result_2);
         }
       }
     }
@@ -36,13 +36,13 @@ void makeSet(vector<set<int>>& result_vec_vec, const int count) {
 
 int solution(int _number, int target) {
   number = _number;
-  vector<set<int>> result_vec_vec(8);
+  vector<set<int>> result_set_vec(8);
 
   for (int count = 0; count <= 7; count++) {
-    makeSet(result_vec_vec, count);
+    makeSet(result_set_vec, count);
 
-    auto iter = find(result_vec_vec[count].begin(), result_vec_vec[count].end(), target);
-    if (iter != result_vec_vec[count].end()) {
+    auto iter = find(result_set_vec[count].begin(), result_set_vec[count].end(), target);
+    if (iter != result_set_vec[count].end()) {
       return count + 1;
     }
   }
