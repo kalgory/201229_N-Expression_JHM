@@ -35,7 +35,7 @@ void makeCombination(vector<set<int>>& result_vec_vec, const int count) {
 }
 
 int solution(int _number, int target) {
-  number = _number;
+  number = _number; test
   vector<set<int>> result_vec_vec(8);
 
   for (int count = 0; count <= 7; count++) {
